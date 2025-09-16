@@ -1,0 +1,2 @@
+1. Laster ned nlohmann til lib
+2. laster ned IXWebSockets til lib med  git submodule add https://github.com/machinezone/IXWebSocket.git lib/IXWebSocket
