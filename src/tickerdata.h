@@ -6,5 +6,7 @@ struct TickerData {
     double high;
     double low;
     long timestamp;
-    bool rising = (close > open);
+    bool green = (close > open);
+    double change;
+
 };
