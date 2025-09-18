@@ -1,3 +1,40 @@
 1. Laster ned nlohmann til lib
 2. laster ned IXWebSockets til lib med  git submodule add https://github.com/machinezone/IXWebSocket.git lib/IXWebSocket
 3. laster ned FTXUI. Kompiler med cmake og installer. Lager en egen build-katalog under FTXUI
+
+
+
+Kodeeksempler: Interface.
+i java: 
+interface Animal {
+    void makeSound();
+}
+class Dog implements Animal {
+    public void makeSound() {
+        System.out.println("Woof!");
+    }
+}
+
+i c++:
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    virtual void makeSound() = 0; // Ren virtuell funksjon
+    virtual ~Animal() {} // Viktig: Virtuell destruktør for korrekt nedarving
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() override {
+        cout << "Woof!" << endl;
+    }
+};
+
+int main() {
+    Animal* myDog = new Dog();
+    myDog->makeSound();  // Output: Woof!
+    delete myDog;
+    return 0;
+}

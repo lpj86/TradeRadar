@@ -1,27 +1,24 @@
 #include <ftxui/dom/elements.hpp>
 #include <ftxui/screen/screen.hpp>
 #include <iostream>
- 
-int main() {
-  using namespace ftxui;
- 
-  // Create a simple document with three text elements.
-  Element document = hbox({
-    text("left")   | border,
-    text("middle") | border | flex,
-    text("right")  | border,
-  });
- 
-  // Create a screen with full width and height fitting the document.
-  auto screen = Screen::Create(
-    Dimension::Full(),       // Width
-    Dimension::Fit(document) // Height
+
+int main(){
+  const std::string hello {"Hello"},
+        world {"World"},
+        myftxui {"FTXUI"};
+
+  ftxui::Element doc = ftxui::hbox(
+    ftxui::text( hello ) | ftxui::border,
+    ftxui::text( world ) | ftxui::border,
+    ftxui::text( myftxui ) | ftxui::border | ftxui::flex | ftxui::color(ftxui::Color::Blue)
   );
- 
-  // Render the document onto the screen.
-  Render(screen, document);
- 
-  // Print the screen to the console.
+  ftxui::Screen screen = ftxui::Screen::Create(
+    ftxui::Dimension::Full(),
+    ftxui::Dimension::Fit(doc)
+  );
+
+  ftxui::Render(screen, doc);
   screen.Print();
-  std::cin.get();
+  std::cout << '\n';
+  return 0;
 }
