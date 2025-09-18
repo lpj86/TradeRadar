@@ -1,24 +1,20 @@
-#include <ftxui/dom/elements.hpp>
-#include <ftxui/screen/screen.hpp>
-#include <iostream>
+#include <ftxui/component/screen_interactive.hpp>
+#include <ftxui/component/component.hpp>
+using namespace ftxui;
 
-int main(){
-  const std::string hello {"Hello"},
-        world {"World"},
-        myftxui {"FTXUI"};
+int main() {
+    auto screen = ScreenInteractive::TerminalOutput();
 
-  ftxui::Element doc = ftxui::hbox(
-    ftxui::text( hello ) | ftxui::border,
-    ftxui::text( world ) | ftxui::border,
-    ftxui::text( myftxui ) | ftxui::border | ftxui::flex | ftxui::color(ftxui::Color::Blue)
-  );
-  ftxui::Screen screen = ftxui::Screen::Create(
-    ftxui::Dimension::Full(),
-    ftxui::Dimension::Fit(doc)
-  );
+    int counter = 0;
+    auto button = Button("Trykk meg", [&] { counter++; });
 
-  ftxui::Render(screen, doc);
-  screen.Print();
-  std::cout << '\n';
-  return 0;
+    auto renderer = Renderer(button, [&] {
+        return vbox({
+            text("Antall trykk: " + std::to_string(counter)),
+            separator(),
+            button->Render(),
+        }) | border;
+    });
+
+    screen.Loop(renderer);
 }
